@@ -184,6 +184,9 @@ CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1",
     "https://127.0.0.1",
     'https://kingdesignn.ru',
+    'http://kingdesignn.ru',
+    'https://kingdesignn.ru/*',
+    'http://kingdesignn.ru/*',
     'http://154.194.53.191:4555',
     'http://154.194.53.191',
 ]
