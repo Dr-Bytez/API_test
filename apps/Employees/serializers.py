@@ -9,8 +9,8 @@ class EmployeeCategorySerializer(serializers.ModelSerializer):
         
 
 class EmployeeSerializer(serializers.ModelSerializer):
-    category = EmployeeCategorySerializer
-    
+    position = EmployeeCategorySerializer()
+    image = serializers.ImageField(use_url=True)
     class Meta:
         model = Employee
-        fields = ['id', 'name', 'category']
+        fields = ['id', 'name', 'description', 'image', 'position']

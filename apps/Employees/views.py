@@ -11,8 +11,8 @@ class EmployeesView(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter]
     ordering_fields = ['id', 'name',]
-    search_fields = ['name', 'category__title',]
-    filterset_fields = ['id','name', 'category__title',]
+    search_fields = ['name', 'position__title',]
+    filterset_fields = ['id','name', 'position__title',]
     
 
 class SingleEmployeeView(generics.RetrieveAPIView):

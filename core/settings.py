@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'corsheaders',
     'apps.Employees',
+    'apps.Applications',
+    'apps.Services',
 ]
 
 MIDDLEWARE = [
@@ -58,10 +60,6 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    'http://154.194.53.191:4555',
-    'http://localhost:5173',
-]
 
 ROOT_URLCONF = 'core.urls'
 
@@ -129,7 +127,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+
+STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "static"
+STATICFILES_DIRS = [(BASE_DIR / "staticfiles"),]
+
+MEDIA_URL = "media/"
+MEDIA_ROOT = BASE_DIR  / "media"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -156,3 +160,12 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 10,
 }
+
+
+### ========  CORS ===========
+
+CORS_ALLOWED_ORIGINS = [
+    'http://154.194.53.191:4555',
+    'http://localhost:5173',
+    'https://kingdesignn.ru',
+]
