@@ -41,12 +41,13 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'django_filters',
     'debug_toolbar',  # required for serving swagger ui's css/js files
-   'drf_yasg',
+    'drf_yasg',
     'corsheaders',
     'apps.Employees',
     'apps.Applications',
     'apps.Services',
     'apps.Contacts',
+    'apps.Projects',
 ]
 
 MIDDLEWARE = [
@@ -186,8 +187,6 @@ CSRF_TRUSTED_ORIGINS = [
     'https://kingdesignn.ru',
     'http://kingdesignn.ru',
     'https://kingdesignn.ru/*',
-    'http://kingdesignn.ru/*',
-    'http://154.194.53.191:4555',
     'http://154.194.53.191',
 ]
 
