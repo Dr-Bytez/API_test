@@ -5,6 +5,12 @@ from apps.Employees.models import Employee
 def user_directory_path(instance, filename):
     return "projects/{0}/{1}".format(instance.title, filename)
 
+def image_directory_path(instance, filename):
+    return "projects/{0}/{1}".format(instance.project.title, filename)
+
+
+
+
 
 class Project(models.Model):
     title = models.CharField(max_length=255)
@@ -14,7 +20,11 @@ class Project(models.Model):
     url = models.CharField(max_length=255,null=True, blank=True)
     developers = models.ManyToManyField(Employee, null=True, blank=True)
     
+    
     def __str__(self):
         return self.title
     
     
+class ProjectImages(models.Model):
+    image = models.ImageField(upload_to=image_directory_path)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='project_images')

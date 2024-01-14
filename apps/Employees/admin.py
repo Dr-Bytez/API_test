@@ -4,3 +4,6 @@ from .models import *
 
 admin.site.register(EmployeeCategory)
 admin.site.register(Employee)
+admin.site.register(EmploymentHistory)
+admin.site.register(Skills)
+admin.site.register(Certificates)
