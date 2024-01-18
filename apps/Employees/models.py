@@ -28,9 +28,16 @@ class EmploymentHistory(models.Model):
     def __str__(self):
         return self.company_name
     
+
+class SkillCategory(models.Model):
+    name = models.CharField(max_length=255)
     
+    def __str__(self):
+        return self.name
+ 
 class Skills(models.Model):
     skill = models.CharField(max_length=255)
+    category = models.ForeignKey(SkillCategory, on_delete=models.CASCADE, default=1)
     image = models.ImageField(upload_to=skills_directory_path)
     
     def __str__(self):
@@ -38,7 +45,7 @@ class Skills(models.Model):
     
 class Certificates(models.Model):
     certificate_name = models.CharField(max_length=255)
-    image = models.ImageField(upload_to=certificate_directory_path)
+    image = models.ImageField(upload_to=certificate_directory_path, max_length=255)
     url = models.URLField()
     
     def __str__(self):
