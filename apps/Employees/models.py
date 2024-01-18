@@ -19,7 +19,7 @@ class EmployeeCategory(models.Model):
         return self.title
     
 class EmploymentHistory(models.Model):
-    job_title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
     company_name = models.CharField(max_length=255)
     description = models.TextField()
     from_date = models.DateField()
@@ -44,12 +44,12 @@ class Skills(models.Model):
         return self.skill
     
 class Certificates(models.Model):
-    certificate_name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
     image = models.ImageField(upload_to=certificate_directory_path, max_length=255)
     url = models.URLField()
     
     def __str__(self):
-        return self.certificate_name
+        return self.name
     
 class Employee(models.Model):
     name = models.CharField(max_length=255)

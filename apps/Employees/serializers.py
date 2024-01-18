@@ -11,21 +11,29 @@ class EmployeeCategorySerializer(serializers.ModelSerializer):
 class EmploymentHistorySerializer(serializers.ModelSerializer):
     class Meta:
         model = EmploymentHistory
-        fields = ['id', 'job_title', 'company_name', 'description', 'from_date', 'to_date',]
+        fields = ['id', 'title', 'company_name', 'description', 'from_date', 'to_date',]
     
+    
+class SkillCategorySerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = SkillCategory
+        fields = ['id','name',]
+   
         
 class SkillsSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(use_url=True)
+    category = SkillCategorySerializer(read_only=True)
     class Meta:
         model = Skills
-        fields = ['id', 'skill', 'image',]
+        fields = ['id', 'skill', 'category','image',]
    
         
 class CertificatesSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(use_url=True)
     class Meta:
         model = Certificates
-        fields = ['id', 'certificate_name', 'image', 'url',]
+        fields = ['id', 'name', 'image', 'url',]
         
 
 class EmployeeSerializer(serializers.ModelSerializer):
