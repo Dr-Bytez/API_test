@@ -1,5 +1,5 @@
 from django.db import models
-
+from ckeditor.fields import RichTextField
 # Create your models here.
 
 def user_directory_path(instance, filename):
@@ -10,7 +10,7 @@ class Service(models.Model):
     title = models.CharField(max_length=255)
     price = models.SmallIntegerField()
     image = models.ImageField(upload_to=user_directory_path)
-    description = models.TextField()
+    description = RichTextField()
     slug = models.SlugField(max_length=255, unique=True)
     
     def __str__(self):

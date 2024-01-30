@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 from apps.Employees.models import Employee
 # Create your models here.
 
@@ -14,7 +15,7 @@ def image_directory_path(instance, filename):
 
 class Project(models.Model):
     title = models.CharField(max_length=255)
-    description = models.TextField(null=True, blank=True)
+    description = RichTextField(null=True, blank=True)
     image = models.ImageField(upload_to=user_directory_path,null=True, blank=True)
     slug = models.SlugField()
     url = models.CharField(max_length=255,null=True, blank=True)

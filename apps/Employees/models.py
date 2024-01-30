@@ -1,5 +1,5 @@
 from django.db import models
-
+from ckeditor.fields import RichTextField
 # Create your models here.
 
 def user_directory_path(instance, filename):
@@ -21,7 +21,7 @@ class EmployeeCategory(models.Model):
 class EmploymentHistory(models.Model):
     title = models.CharField(max_length=255)
     company_name = models.CharField(max_length=255)
-    description = models.TextField()
+    description = RichTextField()
     from_date = models.DateField()
     to_date = models.DateField(null=True, blank=True)
     
@@ -53,7 +53,7 @@ class Certificates(models.Model):
     
 class Employee(models.Model):
     name = models.CharField(max_length=255)
-    description = models.TextField()
+    description = RichTextField()
     image = models.ImageField(upload_to=user_directory_path, max_length=255)
     position = models.ForeignKey(EmployeeCategory, on_delete=models.PROTECT)
     employment_history = models.ManyToManyField(EmploymentHistory, null=True, blank=True)

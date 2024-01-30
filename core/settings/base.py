@@ -10,45 +10,65 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import os
+from datetime import timedelta
 from pathlib import Path
+from environs import Env
+from core.ckeditor import *
+from core.jazzmin import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+env = Env()
+env.read_env(os.path.join(BASE_DIR, ".env"), recurse=False)
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-pu#s5=vml6^qh4dacw_@@pphyxp!8pb)=#f+fnuim@@9pun#ni'
+SECRET_KEY = env.str("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool("DEBUG")
 
 ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
-INSTALLED_APPS = [
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
+
+THIRD_PARTY_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'django_filters',
-    'debug_toolbar',  # required for serving swagger ui's css/js files
+    'debug_toolbar',
     'drf_yasg',
     'corsheaders',
+    'jazzmin',
+    'ckeditor',
+    'ckeditor_uploader',
+]
+
+
+CUSTOM_APPS = [
     'apps.Employees',
     'apps.Applications',
     'apps.Services',
     'apps.Contacts',
     'apps.Projects',
 ]
+
+INSTALLED_APPS = THIRD_PARTY_APPS + CUSTOM_APPS + DJANGO_APPS 
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -131,9 +151,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 
-STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / "static"
-STATICFILES_DIRS = [(BASE_DIR / "staticfiles"),]
+STATIC_URL = '/static/'
+
+# Add these new lines
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR  / "media"
@@ -144,9 +169,11 @@ MEDIA_ROOT = BASE_DIR  / "media"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES':[
@@ -160,50 +187,26 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ],
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle',
+    ],
+    'DEFAULT_THROTTLE_RATES' : {
+        'anon': '10/second',
+        'user': '10/second',
+    },
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 10,
 }
 
 
-### ========  CORS ===========
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
 
-CORS_ALLOWED_ORIGINS = [
-    'http://154.194.53.191:4555',
-    'http://localhost:5173',
-    'https://kingdesignn.ru',
-    "http://localhost",
-    "https://localhost",
-]
-
-USE_X_FORWARDED_HOST = True
-SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-
-CSRF_COOKIE_SECURE = True
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost",
-    "https://localhost",
-    "http://127.0.0.1",
-    "https://127.0.0.1",
-    'https://kingdesignn.ru',
-    'http://kingdesignn.ru',
-    'https://kingdesignn.ru/*',
-    'http://154.194.53.191',
-]
-
-
-###################################################################
-# CORS
-###################################################################
-
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_HEADERS = ["*"]
-
-# HOST_SCHEME                     = "http://"
-# SECURE_PROXY_SSL_HEADER         = None
-# SECURE_SSL_REDIRECT             = False
-# SESSION_COOKIE_SECURE           = False
-# CSRF_COOKIE_SECURE              = False
-# SECURE_HSTS_SECONDS             = None
-# SECURE_HSTS_INCLUDE_SUBDOMAINS  = False
-# SECURE_FRAME_DENY               = False

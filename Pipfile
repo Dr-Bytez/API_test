@@ -10,6 +10,11 @@ django-debug-toolbar = "*"
 django-cors-headers = "*"
 pillow = "*"
 drf-yasg = "*"
+environs = "*"
+django-jazzmin = "*"
+django-ckeditor = "*"
+redis = "*"
+django-redis = "*"
 
 [dev-packages]
 
