@@ -15,6 +15,7 @@ django-jazzmin = "*"
 django-ckeditor = "*"
 redis = "*"
 django-redis = "*"
+async-timeout = "*"
 
 [dev-packages]
 
