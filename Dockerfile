@@ -18,6 +18,8 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 
 COPY .env /app/
 
+
+
 # Expose the port the app runs on
 EXPOSE 8000
 

@@ -10,6 +10,7 @@ CORS_ALLOWED_ORIGINS = [
     'https://kingdesignn.ru',
     "http://localhost",
     "https://localhost",
+    'http://0.0.0.0',
 ]
 
 USE_X_FORWARDED_HOST = True
@@ -24,7 +25,7 @@ CSRF_TRUSTED_ORIGINS = [
     'https://kingdesignn.ru',
     'http://kingdesignn.ru',
     'https://kingdesignn.ru/*',
-    'http://154.194.53.191',
+    'http://0.0.0.0',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
