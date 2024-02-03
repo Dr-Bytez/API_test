@@ -8,11 +8,11 @@ JAZZMIN_SETTINGS: dict = {
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
     "site_brand": "KingDesignn Studio",
     # Logo to use for your site, must be present in static files, used for brand on top left
-    "site_logo": "icons/kingdesignn.svg",
+    "site_logo": "icons/logo.svg",
     # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
-    "login_logo": "icons/kingdesignn.svg",
+    "login_logo": "icons/logo.svg",
     # Logo to use for login form in dark themes (defaults to login_logo)
-    "login_logo_dark": "icons/kingdesignn.svg",
+    "login_logo_dark": "icons/logo.svg",
     # CSS classes that are applied to the logo above
     "site_logo_classes": "img",
     # Relative path to a favicon for your site, will default to site_logo if absent (ideally 32x32 px)
