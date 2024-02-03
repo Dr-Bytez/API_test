@@ -16,9 +16,9 @@ def image_directory_path(instance, filename):
 class Project(models.Model):
     title = models.CharField(max_length=255)
     description = RichTextField(null=True, blank=True)
-    image = models.ImageField(upload_to=user_directory_path,null=True, blank=True)
+    image = models.ImageField(max_length=1024,upload_to=user_directory_path,null=True, blank=True)
     slug = models.SlugField()
-    url = models.CharField(max_length=255,null=True, blank=True)
+    url = models.CharField(max_length=1024,null=True, blank=True)
     developers = models.ManyToManyField(Employee, null=True, blank=True)
     
     

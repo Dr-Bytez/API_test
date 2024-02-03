@@ -38,15 +38,15 @@ class SkillCategory(models.Model):
 class Skills(models.Model):
     skill = models.CharField(max_length=255)
     category = models.ForeignKey(SkillCategory, on_delete=models.CASCADE, default=1)
-    image = models.ImageField(upload_to=skills_directory_path)
+    image = models.ImageField(upload_to=skills_directory_path,max_length=1024)
     
     def __str__(self):
         return self.skill
     
 class Certificates(models.Model):
     name = models.CharField(max_length=255)
-    image = models.ImageField(upload_to=certificate_directory_path, max_length=255)
-    url = models.URLField()
+    image = models.ImageField(upload_to=certificate_directory_path, max_length=1024)
+    url = models.URLField(max_length=1024)
     
     def __str__(self):
         return self.name
@@ -54,7 +54,7 @@ class Certificates(models.Model):
 class Employee(models.Model):
     name = models.CharField(max_length=255)
     description = RichTextField()
-    image = models.ImageField(upload_to=user_directory_path, max_length=255)
+    image = models.ImageField(upload_to=user_directory_path, max_length=1024)
     position = models.ForeignKey(EmployeeCategory, on_delete=models.PROTECT)
     employment_history = models.ManyToManyField(EmploymentHistory, null=True, blank=True)
     skills = models.ManyToManyField(Skills, null=True, blank=True)
