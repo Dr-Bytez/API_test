@@ -51,7 +51,7 @@ class EmploymentHistory(models.Model):
     description = RichTextField()
     from_date = models.DateField()
     to_date = models.DateField(null=True, blank=True)
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, default=1)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, default=1, related_name='employment_history')
     
     def __str__(self):
         return self.company_name
@@ -61,7 +61,7 @@ class Certificates(models.Model):
     name = models.CharField(max_length=255)
     image = models.ImageField(upload_to=certificate_directory_path, max_length=1024)
     url = models.URLField(max_length=1024)
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, default=1)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, default=1, related_name='certificates')
     def __str__(self):
         return self.name
     
