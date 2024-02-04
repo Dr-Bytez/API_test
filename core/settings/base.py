@@ -167,7 +167,7 @@ MEDIA_ROOT = BASE_DIR  / "media"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+DATA_UPLOAD_MAX_MEMORY_SIZE = 10*1024*1024
 
 INTERNAL_IPS = [
     '127.0.0.1',
