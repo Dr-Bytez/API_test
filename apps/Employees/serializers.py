@@ -39,9 +39,9 @@ class CertificatesSerializer(serializers.ModelSerializer):
 class EmployeeSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(use_url=True)
     position = EmployeeCategorySerializer()
-    employment_history = EmploymentHistorySerializer(many=True)
-    skills = SkillsSerializer(many=True)
-    certificates = CertificatesSerializer(many=True)
+    employment_history = EmploymentHistorySerializer(many=True, read_only=True)
+    skills = SkillsSerializer(many=True, read_only=True)
+    certificates = CertificatesSerializer(many=True, read_only=True)
     class Meta:
         model = Employee
         fields = ['id', 'name', 'description', 'image', 'position', 'employment_history', 'skills', 'certificates',]
