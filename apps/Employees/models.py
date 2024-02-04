@@ -9,7 +9,7 @@ def skills_directory_path(instance, filename):
     return "skills/{0}/{1}".format(instance.skill, filename)
 
 def certificate_directory_path(instance, filename):
-    return "certificates/{0}/{1}".format(instance.certificate_name, filename)
+    return "certificates/{0}/{1}".format(instance.name, filename)
 
 
 class EmployeeCategory(models.Model):
